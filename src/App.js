@@ -4,7 +4,9 @@ import './App.css';
 import NavMovie from './Components/NavMovie';
 import ListMovie from './Components/ListMovie';
 import AddMovie from './Components/AddMovie'; 
-
+import { Route, Routes } from 'react-router-dom';
+import Home from './Components/Home';
+import Movie from './Components/Movies';
 function App() {
 const [movies,setMovies] = useState( [  
     {title : 'Dachra', description :'Yasmine, étudiante en journalisme, et ses deux amis Walid et Bilel qui cherchent à élucider le mystère d’un vieux crime, commis il y a plus de 25 ans. Au milieu de nulle part, une femme avait été trouvée mutilée et presque morte. Une fois leur investigation terminée, ils vont se trouver dans une forêt où ils allaient découvrir un petit village isolé appelé “Dachra”. Coincé dans ce territoire inconnu, le trio va essayer de fuir l’horreur. Auront-ils réussi à s’échapper ?',posterURL:'https://pictures.artify.tn/media/r9p6ux7liv6q4pxabgwi.jpg?width=200',rating : 5, id : Math.random()},
@@ -12,21 +14,22 @@ const [movies,setMovies] = useState( [
     {title : 'Noce d’été', description :'Hamid est journaliste, la trentaine passée et il vit son célibat avec sa famille petite bourgeoise comme un échappatoire pour ne pas ressembler aux siens. Sa famille veut le marier à tout prix avec sa voisine Rym (30 ans) pour mettre fin à ses hésitations, et aux mauvaises langues qui n’épargnent pas les célibataires endurcis. N’osant s’opposer à la décision de mariage de sa famille, Hamid préfère fuir l’atmosphère des préparatifs…',posterURL:'https://pictures.artify.tn/media/zhkfzolegpiij9rzf3ui.jpg?width=200',rating : 5, id : Math.random()},
     {title : 'A Peine J’ouvre Les Yeux', description :'Tunis, été 2010, quelques mois avant la Révolution, Farah 18 ans passe son bac et sa famille l’imagine déjà médecin… mais elle ne voit pas les choses de la même manière. Elle chante au sein d¹un groupe de rock engagé. Elle vibre, s’enivre, découvre l’amour et sa ville de nuit contre la volonté d’Hayet, sa mère, qui connaît la Tunisie et ses interdits.',posterURL:'https://pictures.artify.tn/media/r07wsehw43shedjuick2.jpg?width=200',rating : 2, id : Math.random()},
     ])
-
-
-
-    
- 
+    const [search,setSearch] = useState('')
+    const [njoum,setNjoum] = useState(0)
   return (
   <div>
 
 
 
     <NavMovie/>
-    <AddMovie movies={movies} setMovies={setMovies}/>
-    <ListMovie movies ={movies}/>
-    
-  </div>
+    <Routes>
+      <Route path='/' element ={<Home/>}/>
+<Route path='/ListMovies' element={<ListMovie movies={movies} search={search} njoum={njoum} setNjoum={setNjoum} setSearch={setSearch} setMovies={setMovies}/>}/>
+<Route path='/Movies/:id' element={<Movie movies={movies}/>}/>
+    </Routes>
+
+    </div>
+
   )
 }
 
